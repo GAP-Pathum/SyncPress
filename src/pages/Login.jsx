@@ -1,81 +1,99 @@
+// src/Login.jsx
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from './firebaseConfig'; // Make sure to have this file set up
-import { Button, TextField, Typography } from '@mui/material';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+import './login.css'; // Reusing the styles for consistency
 
-// Initialize Firebase app
-initializeApp(firebaseConfig);
+function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const auth = getAuth();
 
-  const handleLogin = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-      // Show success alert
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: `Welcome back, ${user.email}!`,
-        confirmButtonColor: '#3085d6',
-      });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      // Clear input fields after login
-      setEmail('');
-      setPassword('');
-    } catch (error) {
-      // Show error alert
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: error.message,
-        confirmButtonColor: '#d33',
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        Swal.fire({
+          title: 'Login Successful!',
+          text: 'Welcome back!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
+        console.log('User signed in:', userCredential.user);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Try Again',
+        });
+        console.error('Error:', error.code, error.message);
       });
-    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="p-8 bg-white rounded-lg shadow-lg max-w-md w-full">
-        <Typography variant="h4" component="h1" gutterBottom align="center">
-          Log In
-        </Typography>
-
-        <TextField
-          label="Email"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <TextField
-          label="Password"
-          variant="outlined"
-          type="password"
-          fullWidth
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <Button
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={handleLogin}
-          style={{ marginTop: '16px' }}
-        >
-          Log In
-        </Button>
+    <div className='content'>
+     <h1 id='topic'>
+      Welcome back to SyncPress
+    </h1> 
+      <div className="login-container">
+        {/* Login Form Section */}
+        <div className="login-card">
+          <h2 className="login-title">Login</h2>
+          <form onSubmit={handleSubmit} className="signup-form">
+            <div className="input-group">
+              <TextField
+                id="email"
+                label="Email"
+                variant="standard"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <TextField
+                id="password"
+                label="Password"
+                variant="standard"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="input-field"
+                required
+              />
+            </div>
+            <Button type="submit" variant="contained" color="primary" className="signup-button">
+              Login
+            </Button>
+          </form>
+          <p className="signin-text">
+            Don't have an account? <Link href="/signup" className="signin-link">Sign up</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 }
+
+export default Login;
