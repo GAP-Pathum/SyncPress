@@ -6,6 +6,7 @@ import './App.css'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
 import Home from './pages/home';
+import CvResumeCreation from './pages/CvResumeCreation';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/cv" element={<CvResumeCreation />} />
          </Routes>
     </Router>
 
