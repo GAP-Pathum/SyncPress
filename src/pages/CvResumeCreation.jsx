@@ -95,16 +95,7 @@ function CvResumeCreation() {
                             required
                         />
                     </div>
-                    <div className="input-group">
-                        <label>Professional Summary</label>
-                        <textarea
-                            name="summary"
-                            value={formData.summary}
-                            onChange={handleChange}
-                            className="input-field"
-                            required
-                        />
-                    </div>
+                   
                     <button type="submit" className="submit-button">Submit</button>
                 </form>
             </div>
