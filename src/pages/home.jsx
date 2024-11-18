@@ -1,26 +1,31 @@
-import React from 'react'
+import React from 'react';
 import Navbar from '../components/navbar/navbar';
+import { lightModeColors, darkModeColors } from '../constants/colors'; // Update the path as necessary
 
 function Home() {
-  return (
-    <div className="bg-cover bg-center w-[100%] bg-black bg-opacity-50">
-      <Navbar />
-      <h1 className="text-[50px] font-bold text-white text-left  bg-black bg-opacity-50">We create your Idea </h1>
+  const colors = lightModeColors; // Change to lightModeColors for light mode
 
-      <div className="min-h-screen flex items-center justify-center w-[100%] bg-black bg-opacity-50">
-      
-        <div className="bg-white shadow-lg rounded-lg p-8 max-w-md">
-          <h1 className="text-2xl font-bold text-gray-800">Welcome to Tailwind CSS</h1>
-          <p className="text-gray-600 mt-4">
+  return (
+    <div style={{ background: `linear-gradient(to bottom, ${colors.primary}, ${colors.background})`, width: '100%', backgroundOpacity: '50%' }}>
+      <Navbar />
+      <h1 style={{ fontSize: '50px', fontWeight: 'bold', color: colors.topic, textAlign: 'left', backgroundColor: colors.background, backgroundOpacity: '50%' }}>
+        We create your Idea
+      </h1>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', backgroundColor: colors.background, backgroundOpacity: '50%' }}>
+        <div style={{ backgroundColor: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '32px', maxWidth: '400px' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: colors.secondary }}>
+            Welcome to Tailwind CSS
+          </h1>
+          <p style={{ color: colors.accent, marginTop: '16px' }}>
             This is a sample page styled using Tailwind CSS in a React Vite project.
           </p>
-          <button className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <button style={{ marginTop: '24px', padding: '8px 16px', backgroundColor: colors.primary, color: 'white', borderRadius: '4px', hover: { backgroundColor: colors.secondary } }}>
             Click Me
           </button>
         </div>
       </div>
     </div>
   );
-  };
+}
 
-  export default Home;
+export default Home;
