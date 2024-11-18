@@ -5,7 +5,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-import './login.css'; // Reusing the styles for consistency
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -48,49 +47,44 @@ function Login() {
   };
 
   return (
-    <div className='content'>
-     <h1 id='topic'>
-      Welcome back to SyncPress
-    </h1> 
-      <div className="login-container">
-        {/* Login Form Section */}
-        <div className="login-card">
-          <h2 className="login-title">Login</h2>
-          <form onSubmit={handleSubmit} className="signup-form">
-            <div className="input-group">
-              <TextField
-                id="email"
-                label="Email"
-                variant="standard"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="input-field"
-                required
-              />
-            </div>
-            <div className="input-group">
-              <TextField
-                id="password"
-                label="Password"
-                variant="standard"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="input-field"
-                required
-              />
-            </div>
-            <Button type="submit" variant="contained" color="primary" className="signup-button">
-              Login
-            </Button>
-          </form>
-          <p className="signin-text">
-            Don't have an account? <Link href="/signup" className="signin-link">Sign up</Link>
-          </p>
-        </div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold text-center text-gray-900">Welcome back to SyncPress</h1>
+        <h2 className="text-xl font-semibold text-center text-gray-700">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <TextField
+              id="email"
+              label="Email"
+              variant="standard"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full"
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <TextField
+              id="password"
+              label="Password"
+              variant="standard"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full"
+              required
+            />
+          </div>
+          <Button type="submit" variant="contained" color="primary" className="w-full py-2">
+            Login
+          </Button>
+        </form>
+        <p className="text-center text-gray-600">
+          Don't have an account? <Link href="/signup" className="text-blue-500">Sign up</Link>
+        </p>
       </div>
     </div>
   );
