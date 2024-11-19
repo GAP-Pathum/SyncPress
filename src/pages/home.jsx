@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/navbar/navbar';
-import { lightModeColors, darkModeColors } from '../constants/colors'; // Update the path as necessary
+import { lightTheme, darkTheme, gradientAnimation } from '../constants/colors';
+import { Fonts } from '../constants/fonts';
+import img1 from '../assets/images/img1.png';
 
 function Home() {
-  const colors = lightModeColors; // Change to lightModeColors for light mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const colors = isDarkMode ? darkTheme : lightTheme;
+
+  useEffect(() => {
+    const styleSheet = document.styleSheets[0];
+    styleSheet.insertRule(gradientAnimation, styleSheet.cssRules.length);
+  }, []);
 
   return (
-    <div style={{ background: `linear-gradient(to bottom, ${colors.primary}, ${colors.background})`, width: '100%', backgroundOpacity: '50%' }}>
-      <Navbar />
-      <h1 style={{ fontSize: '50px', fontWeight: 'bold', color: colors.topic, textAlign: 'left', backgroundColor: colors.background, backgroundOpacity: '50%' }}>
-        We create your Idea
-      </h1>
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', backgroundColor: colors.background, backgroundOpacity: '50%' }}>
-        <div style={{ backgroundColor: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', borderRadius: '8px', padding: '32px', maxWidth: '400px' }}>
-          <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: colors.secondary }}>
-            Welcome to Tailwind CSS
-          </h1>
-          <p style={{ color: colors.accent, marginTop: '16px' }}>
-            This is a sample page styled using Tailwind CSS in a React Vite project.
-          </p>
-          <button style={{ marginTop: '24px', padding: '8px 16px', backgroundColor: colors.primary, color: 'white', borderRadius: '4px', hover: { backgroundColor: colors.secondary } }}>
-            Click Me
-          </button>
-        </div>
+    <div 
+      style={{ 
+        background: colors.gradient.background, 
+        backgroundSize: colors.gradient.backgroundSize, 
+        animation: colors.gradient.animation,
+        width: '100%' 
+      }}
+    >
+      <Navbar 
+        isDarkMode={isDarkMode} 
+        setIsDarkMode={setIsDarkMode} 
+        colors={colors} 
+      />
+      <div className="flex justify-between items-left p-10 pb-0">
+        <h1 style={{ fontSize: '50px', fontWeight: 'bold', color: colors.textPrimary, fontFamily: Fonts.Title }}>
+          We create your Ideas<br/>Into Reality...
+          <p style={{ fontSize: '25px', color: colors.textSecondary, fontFamily: Fonts.SemiBold}}>
+          We are ready to full fill <br/>Your all digital needs</p>
+        </h1>
+        <img src={img1} alt="Description of image" style={{ width: '60%', height: 'auto' }} />
+      </div>
+      <hr/>
+      <div className="flex justify-between items-left p-10 ">
+        
       </div>
     </div>
   );

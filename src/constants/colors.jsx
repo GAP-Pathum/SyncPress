@@ -1,19 +1,41 @@
-const lightModeColors = {
-    primary: '#52bf90', // (82,191,144)
-    secondary: '#49ab81', // (73,171,129)
-    accent: '#419873', // (65,152,115)
-    background: '#ffffff', // (57,133,100)
-    text: '#317256', // (49,114,86)
-    topic: '#000000'
+const lightTheme = {
+    background: '#FFFFFF',
+    backgroundSecondary: '#F5F5F5',
+    textPrimary: '#000000',
+    textSecondary: '#333333',
+    accentPrimary: '#007BFF',
+    accentSecondary: '#0056b3',
+    border: '#E0E0E0',
+    error: '#FF4D4F',
+    gradient: {
+        background: 'linear-gradient(270deg, purple, white)',
+        backgroundSize: '400% 400%',
+        animation: 'gradientBackground 10s ease infinite',
+    }
 };
 
-const darkModeColors = {
-    primary: '#52bf90', // (82,191,144)
-    secondary: '#49ab81', // (73,171,129)
-    accent: '#419873', // (65,152,115)
-    background: '#000000', // (0,0,0)
-    text: '#398564', // (57,133,100)
-    topic: '#ffffff'
+const darkTheme = {
+    background: '#121212',
+    backgroundSecondary: '#1E1E1E',
+    textPrimary: '#FFFFFF',
+    textSecondary: '#CCCCCC',
+    accentPrimary: '#007BFF',
+    accentSecondary: '#66A3FF',
+    border: '#333333',
+    error: '#FF4D4F',
+    gradient: {
+        background: 'linear-gradient(270deg, purple, blue, black)',
+        backgroundSize: '400% 400%',
+        animation: 'gradientBackground 10s ease infinite',
+    }
 };
 
-export { lightModeColors, darkModeColors };
+const gradientAnimation = `
+    @keyframes gradientBackground {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+`;
+
+export { lightTheme, darkTheme, gradientAnimation };
