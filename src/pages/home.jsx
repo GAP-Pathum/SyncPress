@@ -28,11 +28,16 @@ function Home() {
         colors={colors} 
       />
       <div className="flex justify-between items-left p-10 pb-0">
+        <div>
         <h1 style={{ fontSize: '50px', fontWeight: 'bold', color: colors.textPrimary, fontFamily: Fonts.Title }}>
           We create your Ideas<br/>Into Reality...
           <p style={{ fontSize: '25px', color: colors.textSecondary, fontFamily: Fonts.SemiBold}}>
           We are ready to full fill <br/>Your all digital needs</p>
         </h1>
+          <div>
+            <h2 style={{color: colors.textPrimary, paddingTop: '50px', fontFamily: Fonts.Lights}}>Who engaged with us currently</h2>
+          </div>
+        </div>
         <img src={img1} alt="Description of image" style={{ width: '60%', height: 'auto' }} />
       </div>
       <hr/>
