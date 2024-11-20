@@ -1,12 +1,15 @@
-// src/Login.jsx
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import { lightTheme, darkTheme } from '../constants/colors';
 
 function Login() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const colors = isDarkMode ? darkTheme : lightTheme;
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -47,44 +50,94 @@ function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold text-center text-gray-900">Welcome back to SyncPress</h1>
-        <h2 className="text-xl font-semibold text-center text-gray-700">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <TextField
-              id="email"
-              label="Email"
-              variant="standard"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full"
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <TextField
-              id="password"
-              label="Password"
-              variant="standard"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full"
-              required
-            />
-          </div>
-          <Button type="submit" variant="contained" color="primary" className="w-full py-2">
-            Login
-          </Button>
-        </form>
-        <p className="text-center text-gray-600">
-          Don't have an account? <Link href="/signup" className="text-blue-500">Sign up</Link>
-        </p>
+    <div className="gradient-bg">
+      <nav className="bg-gray-800 p-4 flex justify-between items-center">
+        <div className="text-white text-2xl font-bold">SyncPress</div>
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={() => setIsDarkMode(!isDarkMode)} 
+            style={{ 
+              padding: '8px 12px', 
+              borderRadius: '4px', 
+              cursor: 'pointer', 
+              backgroundColor: isDarkMode ? '#f9f9f9' : '#1f2937', 
+              color: isDarkMode ? '#1f2937' : '#f9f9f9', 
+              transition: 'background-color 0.3s, color 0.3s' 
+            }}
+          >
+            {isDarkMode ? '☀' : '🌙'}
+          </button>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+            Signup
+          </button>
+        </div>
+      </nav>
+
+      <div
+        className="flex items-center justify-center min-h-screen"
+        style={{ backgroundColor: colors.background }}
+      >
+        <div
+          className="w-full max-w-md p-8 space-y-8 rounded-lg"
+          style={{
+            backgroundColor: colors.cardBackground,
+            color: colors.textPrimary,
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <h1 className="text-2xl font-bold text-center">Welcome back to SyncPress</h1>
+          <h2 className="text-xl font-semibold text-center">Login</h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <TextField
+                id="email"
+                label="Email"
+                variant="standard"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full"
+                required
+                InputLabelProps={{ style: { color: colors.textSecondary } }}
+                InputProps={{ style: { color: colors.textPrimary } }}
+              />
+            </div>
+            <div className="space-y-2">
+              <TextField
+                id="password"
+                label="Password"
+                variant="standard"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full"
+                required
+                InputLabelProps={{ style: { color: colors.textSecondary } }}
+                InputProps={{ style: { color: colors.textPrimary } }}
+              />
+            </div>
+            <Button
+              type="submit"
+              variant="contained"
+              className="w-full py-2"
+              style={{
+                backgroundColor: colors.accentPrimary,
+                color: colors.textButton,
+                fontFamily: 'Arial, sans-serif',
+              }}
+            >
+              Login
+            </Button>
+          </form>
+          <p className="text-center">
+            Don't have an account?{' '}
+            <Link href="/signup" style={{ color: colors.link }}>
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

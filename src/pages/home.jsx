@@ -3,6 +3,7 @@ import Navbar from '../components/navbar/navbar';
 import { lightTheme, darkTheme, gradientAnimation } from '../constants/colors';
 import { Fonts } from '../constants/fonts';
 import img1 from '../assets/images/img1.png';
+import ProfileImages from '../constants/ProfileImages';
 
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,22 +28,32 @@ function Home() {
         setIsDarkMode={setIsDarkMode} 
         colors={colors} 
       />
-      <div className="flex justify-between items-left p-10 pb-0">
+      <div className="flex justify-between items-start p-10 pb-0">
         <div>
-        <h1 style={{ fontSize: '50px', fontWeight: 'bold', color: colors.textPrimary, fontFamily: Fonts.Title }}>
-          We create your Ideas<br/>Into Reality...
-          <p style={{ fontSize: '25px', color: colors.textSecondary, fontFamily: Fonts.SemiBold}}>
-          We are ready to full fill <br/>Your all digital needs</p>
-        </h1>
+          <h1 className="text-5xl font-bold" style={{ color: colors.textPrimary, fontFamily: Fonts.Title }}>
+            We create your Ideas<br/>Into Reality...
+            <p className="text-2xl" style={{ color: colors.textSecondary, fontFamily: Fonts.SemiBold }}>
+              We are ready to fulfill <br/>Your all digital needs
+            </p>
+          </h1>
           <div>
-            <h2 style={{color: colors.textPrimary, paddingTop: '50px', fontFamily: Fonts.Lights}}>Who engaged with us currently</h2>
+            <h2 className="pt-12" style={{ color: colors.textPrimary, fontFamily: Fonts.Lights }}>
+              Who are engaging with us currently
+            </h2>
+            <ProfileImages/>
+            <button 
+              onClick={() => window.location.href = '/services'} 
+              className="mt-5 bg-accentPrimary text-primary rounded-lg py-2 px-4 font-semibold text-lg border-none cursor-pointer"
+              style={{ backgroundColor: colors.accentPrimary, color: colors.textPrimary, fontFamily: Fonts.SemiBold }}
+            >
+              Let's go
+            </button>
           </div>
         </div>
-        <img src={img1} alt="Description of image" style={{ width: '60%', height: 'auto' }} />
+        <img src={img1} alt="Description of image" className="w-3/5 h-auto" />
       </div>
       <hr/>
-      <div className="flex justify-between items-left p-10 ">
-        
+      <div className="flex justify-between items-start p-10">
       </div>
     </div>
   );
