@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-import { lightTheme, darkTheme } from '../constants/colors';
+import { lightTheme, darkTheme, gradientAnimation } from '../constants/colors';
+import { Fonts } from '../constants/fonts';
 
 function Login() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const colors = isDarkMode ? darkTheme : lightTheme;
+
+  useEffect(() => {
+    const styleSheet = document.styleSheets[0];
+    styleSheet.insertRule(gradientAnimation, styleSheet.cssRules.length);
+  }, []);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -50,7 +56,12 @@ function Login() {
   };
 
   return (
-    <div className="gradient-bg">
+    <div 
+      style={{ 
+        background: colors.gradient.background,
+        animation: colors.gradient.animation,
+      }}
+    >
       <nav className="bg-gray-800 p-4 flex justify-between items-center">
         <div className="text-white text-2xl font-bold">SyncPress</div>
         <div className="flex items-center space-x-4">
@@ -59,8 +70,7 @@ function Login() {
             style={{ 
               padding: '8px 12px', 
               borderRadius: '4px', 
-              cursor: 'pointer', 
-              backgroundColor: isDarkMode ? '#f9f9f9' : '#1f2937', 
+              cursor: 'pointer',
               color: isDarkMode ? '#1f2937' : '#f9f9f9', 
               transition: 'background-color 0.3s, color 0.3s' 
             }}
@@ -75,18 +85,18 @@ function Login() {
 
       <div
         className="flex items-center justify-center min-h-screen"
-        style={{ backgroundColor: colors.background }}
+        style={{ backgroundColor: colors.gradient }}
       >
         <div
-          className="w-full max-w-md p-8 space-y-8 rounded-lg"
+          className="w-8/9 p-6 space-y-8 rounded-lg"
           style={{
-            backgroundColor: colors.cardBackground,
-            color: colors.textPrimary,
-            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+            backgroundColor: colors.backgroundSecondary,
+            color: colors.gradient,
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.8)',
           }}
         >
-          <h1 className="text-2xl font-bold text-center">Welcome back to SyncPress</h1>
-          <h2 className="text-xl font-semibold text-center">Login</h2>
+          <h1 className="text-2xl font-bold text-center" style={{ color: colors.textPrimary }}>Welcome back to SyncPress</h1>
+          <h2 className="text-xl font-semibold text-center" style={{ color: colors.textPrimary }}>Login</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <TextField
@@ -125,7 +135,7 @@ function Login() {
               style={{
                 backgroundColor: colors.accentPrimary,
                 color: colors.textButton,
-                fontFamily: 'Arial, sans-serif',
+                fontFamily: Fonts.Topic,
               }}
             >
               Login

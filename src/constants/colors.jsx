@@ -7,6 +7,7 @@ const lightTheme = {
     accentSecondary: '#0056b3',
     border: '#E0E0E0',
     error: '#FF4D4F',
+    cardBackground: '#f0f0f0',
     gradient: {
         background: 'linear-gradient(270deg, purple, white)',
         backgroundSize: '400% 400%',
@@ -23,6 +24,7 @@ const darkTheme = {
     accentSecondary: '#66A3FF',
     border: '#333333',
     error: '#FF4D4F',
+    cardBackground: '#0f0f0f',
     gradient: {
         background: 'linear-gradient(270deg, purple, blue, black)',
         backgroundSize: '400% 400%',

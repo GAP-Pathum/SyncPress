@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = ({ isDarkMode, setIsDarkMode }) => {
     return (
-        <nav className="bg-gray-800 p-4 flex justify-between items-center">
+        <nav className="bg-gray-900 p-4 flex justify-between items-center">
             <div className="text-white text-2xl font-bold">SyncPress</div>
             <ul className="flex space-x-10">
                 <li className="nav-item">
