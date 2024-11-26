@@ -1,40 +1,161 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const Navbar = ({ isDarkMode, setIsDarkMode }) => {
+const Navbar = ({ isDarkMode, setIsDarkMode, colors }) => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control mobile menu visibility
+    const menuRef = useRef(null); // Reference to the mobile menu
+
+    // Close the menu if the user clicks outside of it
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target) && !event.target.closest('.menu-toggle')) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
-        <nav className="bg-gray-900 p-4 flex justify-between items-center">
-            <div className="text-white text-2xl font-bold">SyncPress</div>
-            <ul className="flex space-x-10">
-                <li className="nav-item">
-                    <a href="#home" className="text-white hover:text-gray-400 transition duration-300">Home</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#services" className="text-white hover:text-gray-400 transition duration-300">Services</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#about" className="text-white hover:text-gray-400 transition duration-300">About Us</a>
-                </li>
-                <li className="nav-item">
-                    <a href="#contact" className="text-white hover:text-gray-400 transition duration-300">Contact</a>
-                </li>
-            </ul>
+        <nav 
+            className="p-4 flex justify-between items-center transition-all duration-300 ease-in-out"
+            style={{ backgroundColor: 'transparent' }} // Set background to transparent
+        >
+            {/* Logo */}
+            <div 
+                className={`text-2xl font-bold transition-colors duration-300 ease-in-out 
+                ${isDarkMode ? 'text-white' : 'text-black'}`}
+            >
+                SyncPress
+            </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Desktop Menu Items */}
+            <div className="hidden md:flex-grow md:flex md:justify-center md:items-center">
+                <ul className="flex space-x-8">
+                    <li className="nav-item">
+                        <a 
+                            href="#home" 
+                            className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                        >
+                            Home
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a 
+                            href="#services" 
+                            className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                        >
+                            Services
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a 
+                            href="#about" 
+                            className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                        >
+                            About Us
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a 
+                            href="#contact" 
+                            className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                        >
+                            Contact
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a 
+                            href="#signup" 
+                            className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                        >
+                            Signup
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            {/* Buttons (Right Side) */}
+            <div className='ai-right'>
+                {/* Theme Toggle Button */}
                 <button 
                     onClick={() => setIsDarkMode(!isDarkMode)} 
+                    className="text-white p-2 rounded transition-all duration-300 ease-in-out"
                     style={{ 
-                        padding: '8px 12px', 
-                        borderRadius: '4px', 
-                        cursor: 'pointer',
-
+                        backgroundColor: 'trranparent', 
+                        borderRadius: '4px',
                     }}
                 >
                     {isDarkMode ? '☀' : '🌙'}
                 </button>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
-                    Signup
-                </button>
             </div>
+
+            {/* Menu Toggle Button (Mobile Only) */}
+            <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                className="menu-toggle text-white p-2 rounded md:hidden"
+                style={{ 
+                    backgroundColor: 'transparent', 
+                    borderRadius: '4px',
+                }}
+            >
+                {isMenuOpen ? '✖' : '☰'} {/* Hamburger Icon or Close Icon */}
+            </button>
+
+            {/* Mobile Menu (when isMenuOpen is true) */}
+            {isMenuOpen && (
+                <div 
+                    ref={menuRef} 
+                    className="absolute top-0 right-0 bg-black bg-opacity-50 p-6 w-full h-1/2 md:hidden transition-all duration-500 ease-in-out z-10 backdrop-blur-md" 
+                    style={{ 
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+                    }}
+                >
+                    {/* Close the menu when clicking on the close icon */}
+                    <ul className="flex flex-col space-y-4">
+                        <li className="nav-item">
+                            <a 
+                                href="#home" 
+                                className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                            >
+                                Home
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a 
+                                href="#services" 
+                                className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                            >
+                                Services
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a 
+                                href="#about" 
+                                className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                            >
+                                About Us
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a 
+                                href="#contact" 
+                                className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                            >
+                                Contact
+                            </a>
+                        </li>
+                        <li className="nav-item">
+                            <a 
+                                href="#signup" 
+                                className={`text-white transition-colors duration-300 ease-in-out hover:text-gray-400`}
+                            >
+                                Signup
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            )}
         </nav>
     );
 };

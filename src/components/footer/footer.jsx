@@ -1,33 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa'; // Social icons
+import { Fonts } from '../../constants/fonts'; // Import Fonts
 
-const Footer = () => {
+const Footer = ({ colors }) => {
+    const [email, setEmail] = useState('');
+    const [isSubscribed, setIsSubscribed] = useState(false);
+
+    const handleSubscribe = (e) => {
+        e.preventDefault();
+        // Here, you can handle the email subscription logic
+        if (email) {
+            setIsSubscribed(true);
+            setEmail('patuhmpasindu41@gmail.com');
+            // For example, send the email to your backend
+        }
+    };
+
     return (
-        <footer className="bg-white bg-opacity-85 backdrop-blur-md text-black p-5 rounded-lg flex justify-between items-start flex-wrap">
-            <div className="flex-1 m-1">
-                <div className="max-w-xs">
-                    <img src="src/assets/images/logo.png" alt="Logo" className="max-w-full" />
-                </div>
-            </div>
-            
-            <div className="flex-1 m-1">
-                <ul className="list-none pt-7 mr-36">
-                    <li className="my-1"><a href="/link1" className="text-black no-underline hover:underline transition duration-500 hover:text-blue-900">Home</a></li>
-                    <li className="my-1"><a href="/link2" className="text-black no-underline hover:underline transition duration-500 hover:text-blue-900">About Us</a></li>
-                    <li className="my-1"><a href="/link3" className="text-black no-underline hover:underline transition duration-500 hover:text-blue-900">Contact Us</a></li>
-                </ul>
-            </div>
-            
-            <div className="flex-1 m-1">
-                <div className="mb-2"></div>
-                <div>
-                    <h3 className="mb-2">Subscribe to our newsletter</h3>
-                    <form className="flex flex-col">
-                        <input type="email" placeholder="Enter your email" className="p-2 mb-2 border-none rounded-md" />
-                        <button type="submit" className="p-2 border-none rounded-md bg-red-600 text-white cursor-pointer hover:bg-gray-500">Subscribe</button>
+        <div
+            className="py-16 px-8 mt-20"
+            style={{
+                background: colors.gradient.background,
+                backgroundSize: colors.gradient.backgroundSize,
+                animation: colors.gradient.animation,
+                transition: 'background-color 0.3s, color 0.3s',
+            }}
+        >
+            <div className="container mx-auto text-center">
+                <h2
+                    className="text-4xl font-semibold mb-8"
+                    style={{ color: colors.textPrimary, fontFamily: Fonts.Title }}
+                >
+                    Stay Updated With Us!
+                </h2>
+                <div className="flex justify-center mb-8">
+                    <form onSubmit={handleSubscribe} className="flex items-center max-w-xl w-full">
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="py-2 px-4 w-full text-black rounded-l-lg"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            style={{
+                                borderColor: colors.textPrimary,
+                                backgroundColor: colors.cardBackground,
+                                color: colors.textPrimary,
+                            }}
+                        />
+                        <button
+                            type="submit"
+                            className="py-2 px-6 rounded-r-lg ml-2 transition duration-300"
+                            style={{
+                                backgroundColor: colors.textPrimary,
+                                color: colors.textSecondary,
+                                fontFamily: Fonts.SemiBold,
+                            }}
+                        >
+                            Subscribe
+                        </button>
                     </form>
                 </div>
+                {isSubscribed && (
+                    <p className="text-xl font-medium mb-8" style={{ color: colors.textPrimary }}>
+                        Thanks for subscribing! Stay tuned for updates.
+                    </p>
+                )}
+                <div className="flex justify-center gap-8 mb-8">
+                    {/* Social Icons */}
+                    <a
+                        href="https://facebook.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-3xl hover:text-blue-500 transition duration-300"
+                        style={{ color: colors.textPrimary }}
+                    >
+                        <FaFacebook />
+                    </a>
+                    <a
+                        href="https://twitter.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-3xl hover:text-blue-400 transition duration-300"
+                        style={{ color: colors.textPrimary }}
+                    >
+                        <FaTwitter />
+                    </a>
+                    <a
+                        href="https://linkedin.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-3xl hover:text-blue-600 transition duration-300"
+                        style={{ color: colors.textPrimary }}
+                    >
+                        <FaLinkedin />
+                    </a>
+                    <a
+                        href="https://instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-3xl hover:text-pink-400 transition duration-300"
+                        style={{ color: colors.textPrimary }}
+                    >
+                        <FaInstagram />
+                    </a>
+                </div>
+                <div className="border-t py-6 mt-8" style={{ borderColor: colors.textPrimary }}>
+                    <p className="text-sm" style={{ color: colors.textSecondary }}>
+                        &copy; {new Date().getFullYear()} SyncPress. All rights reserved.
+                    </p>
+                    <p className="text-sm" style={{ color: colors.textSecondary }}>
+                        Designed with ❤️ by G.A.P.Pathum
+                    </p>
+                </div>
             </div>
-        </footer>
+        </div>
     );
 };
 

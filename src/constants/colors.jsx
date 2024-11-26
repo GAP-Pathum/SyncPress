@@ -1,3 +1,6 @@
+//src\constants\colors.jsx
+import { createGlobalStyle } from 'styled-components';
+
 const lightTheme = {
     background: '#FFFFFF',
     backgroundSecondary: '#F5F5F5',
@@ -40,4 +43,8 @@ const gradientAnimation = `
     }
 `;
 
-export { lightTheme, darkTheme, gradientAnimation };
+const GlobalStyle = createGlobalStyle`
+    ${gradientAnimation}
+`;
+
+export { lightTheme, darkTheme, GlobalStyle };

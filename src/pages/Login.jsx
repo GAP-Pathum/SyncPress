@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
-import { lightTheme, darkTheme, gradientAnimation } from '../constants/colors';
+import { lightTheme, darkTheme, GlobalStyle } from '../constants/colors';
 import { Fonts } from '../constants/fonts';
 
 function Login() {
@@ -13,8 +13,8 @@ function Login() {
 
   useEffect(() => {
     const styleSheet = document.styleSheets[0];
-    styleSheet.insertRule(gradientAnimation, styleSheet.cssRules.length);
-  }, []);
+    styleSheet.insertRule(colors.gradient.animation, styleSheet.cssRules.length);
+  }, [colors.gradient.animation]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -62,6 +62,7 @@ function Login() {
         animation: colors.gradient.animation,
       }}
     >
+      <GlobalStyle />
       <nav className="bg-gray-800 p-4 flex justify-between items-center">
         <div className="text-white text-2xl font-bold">SyncPress</div>
         <div className="flex items-center space-x-4">
@@ -85,13 +86,13 @@ function Login() {
 
       <div
         className="flex items-center justify-center min-h-screen"
-        style={{ backgroundColor: colors.gradient }}
+        style={{ backgroundColor: colors.gradient.background }}
       >
         <div
           className="w-8/9 p-6 space-y-8 rounded-lg"
           style={{
             backgroundColor: colors.backgroundSecondary,
-            color: colors.gradient,
+            color: colors.textPrimary,
             boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.8)',
           }}
         >
@@ -143,7 +144,7 @@ function Login() {
           </form>
           <p className="text-center">
             Don't have an account?{' '}
-            <Link href="/signup" style={{ color: colors.link }}>
+            <Link href="/signup" style={{ color: colors.accentPrimary }}>
               Sign up
             </Link>
           </p>
