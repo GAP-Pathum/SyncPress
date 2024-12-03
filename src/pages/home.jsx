@@ -86,7 +86,7 @@ function Home() {
       </div>
 
       <h1 className="text-4xl md:text-5xl font-bold mt-10 text-center" style={{ color: colors.textPrimary, fontFamily: Fonts.Title }}>
-        Experience the easiness with SyncPress
+        Experience the easiness with SyncPress easily !
       </h1>
 
       {/* Service Cards */}
