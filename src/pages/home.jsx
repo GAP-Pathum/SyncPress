@@ -85,9 +85,12 @@ function Home() {
         </Link>
       </div>
 
-      <h1 className="text-4xl md:text-5xl font-bold mt-10 text-center" style={{ color: colors.textPrimary, fontFamily: Fonts.Title }}>
-        Experience the easiness with SyncPress easily !
-      </h1>
+      <h1 
+  className="text-4xl md:text-5xl font-bold mt-10 text-center" 
+  style={{ color: colors.textPrimary, fontFamily: Fonts.Title, fontWeight: 'bold', textAlign: 'center' }}
+>
+  Experience the easiness with SyncPress easily!
+</h1>
 
       {/* Service Cards */}
       <ServiceCards isDarkMode={isDarkMode} colors={colors} />
